@@ -40,9 +40,23 @@ def withdraw():
 def check_balance():
     global balance
 
-    print(f"Your balance is...\nRM{balance:.2f}")
+    print(f"Your balance is RM{balance:.2f}")
+
+def save_balance():
+    global balance
+
+    with open ("bank.txt","w") as file:
+        file.write(str(balance))
+def load_balance():
+    global balance 
+
+    with open ("bank.txt","r") as file:
+        for line in file:
+            balance = float(line.strip())
+        
 
 def main():
+    load_balance()
     while True:
         menu()
 
@@ -55,6 +69,7 @@ def main():
         elif option == "3":
             check_balance()
         elif option == "4":
+            save_balance()
             print("Thank You for using the Bank")
             break 
         else:
